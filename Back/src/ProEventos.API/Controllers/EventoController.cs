@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProEventos.API.Data;
 using ProEventos.API.Models;
 
 namespace ProEventos.API.Controllers
@@ -13,7 +14,7 @@ namespace ProEventos.API.Controllers
     public class EventoController : ControllerBase
     {
 
-        public IEnumerable<Evento> _evento =  new Evento[]{ /// criando os dois eventos fora do get para ser retornado
+        public IEnumerable<Evento> _evento = new Evento[]{ /// criando os dois eventos fora do get para ser retornado
                 new Evento() {
                 EventoId = 1,
                 Tema = "Angular",
@@ -33,23 +34,25 @@ namespace ProEventos.API.Controllers
                 ImagemURL = "foto1.png"
             }
           };
-        public EventoController()///construtor 
+        private readonly DataContext _context;
+        public EventoController(DataContext context)///construtor para chamar o data context pro dados do banco
         {
-       
+          _context = context;
+
         }
 
         [HttpGet]
         public IEnumerable<Evento> Get() //metodos get retorna todos os eventos
         {
-            return _evento;
+            return _context.Eventos;
 
         }
 
-        
+
         [HttpGet("{id}")]
-        public IEnumerable<Evento> Get(int id) //metodos get que retorna por id e usa sobrecarga de metodo
+        public Evento Get(int id) //metodos get que retorna por id e usa sobrecarga de metodo
         {
-            return _evento.Where(evento => evento.EventoId == id); //retorna o evento que é igual o id que é pasasdo
+            return _context.Eventos.FirstOrDefault(evento => evento.EventoId == id); //retorna o evento que é igual o id que é pasasdo
 
         }
 
