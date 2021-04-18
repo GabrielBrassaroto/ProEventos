@@ -11,7 +11,7 @@ namespace ProEventos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]///alterar a rota da api
-    public class EventoController : ControllerBase
+    public class EventosController : ControllerBase
     {
 
         public IEnumerable<Evento> _evento = new Evento[]{ /// criando os dois eventos fora do get para ser retornado
@@ -35,7 +35,7 @@ namespace ProEventos.API.Controllers
             }
           };
         private readonly DataContext _context;
-        public EventoController(DataContext context)///construtor para chamar o data context pro dados do banco
+        public EventosController(DataContext context)///construtor para chamar o data context pro dados do banco
         {
           _context = context;
 

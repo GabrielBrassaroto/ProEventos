@@ -33,6 +33,7 @@ namespace ProEventos.API
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
             services.AddControllers();///arquetitura mvc 
+            services.AddCors();//para aceitar cors do angular
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProEventos.API", Version = "v1" });
@@ -54,6 +55,10 @@ namespace ProEventos.API
             app.UseRouting();///utiliza rota
 
             app.UseAuthorization();
+            
+            app.UseCors(x => x.AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin());//aceita os cors que tenha qualquer header,metodo e origem
 
             app.UseEndpoints(endpoints =>
             {
