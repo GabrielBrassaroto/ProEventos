@@ -7,18 +7,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { NavComponent } from './nav/nav.component';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent, /// declara quem arquivo que vai ter os componentes
-    PalestrantesComponent
+    PalestrantesComponent,
+      NavComponent
    ],
   imports: [
     BrowserModule, /// navegadpr
     AppRoutingModule, /// as rotas do angular
     HttpClientModule,
-    BrowserAnimationsModule ///
+    BrowserAnimationsModule, ///
+    CollapseModule.forRoot() // importação do colapse do angular
   ],
   providers: [],
   bootstrap: [AppComponent]/// bootstrap da aplicacao
